@@ -3,7 +3,7 @@
 all: pi.out
 
 pi.out: pi.c
-	gcc $< -o $@
+	gcc $< -pthread -o $@
 
 clean: 
 	rm *.out
