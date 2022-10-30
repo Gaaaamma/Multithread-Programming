@@ -18,7 +18,6 @@ double monteCarloMethod() {
             inCircle ++;
         }
     }
-    printf("Incircle: %lld\n", inCircle);
     // return the estimate PI
     return (4.0 * inCircle /times);
 }
@@ -34,8 +33,6 @@ void* threadMonteCarloMethod(void *tid) {
             localMonteCarlo ++;
         }
     }
-    printf("Local Monte Carlo Method: %d\n", localMonteCarlo);
-    printf("My PID: %d\n", *(int *)tid);
 
     // add the result to global variable inCircle;
     pthread_mutex_lock(&mutex);
@@ -64,7 +61,6 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    printf("Round: %d, Times: %lld, Range: %lld\n", numThread, times, range);
 
     // Wait for thread done
     for(int i=0; i<numThread; i++){
@@ -72,7 +68,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Show the result
-    printf("PI: %f\n", 4.0 * inCircle / times);
+    printf("%f\n", 4.0 * inCircle / times);
     pthread_mutex_destroy(&mutex);
     return 0;
 }
