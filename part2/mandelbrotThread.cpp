@@ -30,6 +30,9 @@ void workerThreadStart(WorkerArgs *const args) {
   // Of course, you can copy mandelbrotSerial() to this file and
   // modify it to pursue a better performance.
 
+  // Timer start
+  double startTime = CycleTimer::currentSeconds();
+
   // Judge which part this thread should compute
   // Each thread should handle responsibleRows
   int responsibleRows = args->height / args->numThreads; 
@@ -47,6 +50,12 @@ void workerThreadStart(WorkerArgs *const args) {
   }else{
     mandelbrotSerial(args->x0, args->y0, args->x1, args->y1, args->width, args->height, startRow, responsibleRows, args->maxIterations, args->output);
   }
+
+  // Timer stop
+  double endTime = CycleTimer::currentSeconds();
+
+  printf("[Thread %d]:\t\t[%.3f] ms\n", args->threadId, (endTime-startTime)* 1000);
+
 }
 
 //
