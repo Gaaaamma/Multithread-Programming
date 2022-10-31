@@ -35,20 +35,8 @@ void workerThreadStart(WorkerArgs *const args) {
 
   // Judge which part this thread should compute
   // Each thread should handle responsibleRows
-  int responsibleRows = args->height / args->numThreads; 
-  int startRow = args->threadId * responsibleRows ; 
-  int remainRows = args->height % args->numThreads; 
-
-  // Call serial to compute the result
-  if(remainRows !=0){
-    // the last thread need to handle the remain tasks
-    if(args->threadId == args->numThreads -1){
-      mandelbrotSerial(args->x0, args->y0, args->x1, args->y1, args->width, args->height, startRow, responsibleRows+remainRows, args->maxIterations, args->output);
-    }else{
-      mandelbrotSerial(args->x0, args->y0, args->x1, args->y1, args->width, args->height, startRow, responsibleRows, args->maxIterations, args->output);
-    }
-  }else{
-    mandelbrotSerial(args->x0, args->y0, args->x1, args->y1, args->width, args->height, startRow, responsibleRows, args->maxIterations, args->output);
+  for(unsigned int i=args->threadId; i< args->height; i+=args->numThreads){
+    mandelbrotSerial(args->x0, args->y0, args->x1, args->y1, args->width, args->height, i, 1, args->maxIterations, args->output);
   }
 
   // Timer stop
