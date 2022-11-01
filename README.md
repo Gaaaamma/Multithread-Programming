@@ -60,13 +60,24 @@ You will need to meet the following requirements and answer the questions (marke
 Modify the starter code to parallelize the Mandelbrot generation using two processors. Specifically, compute the top half of the image in thread 0, and the bottom half of the image in thread 1. This type of problem decomposition is referred to as spatial decomposition since different spatial regions of the image are computed by different processors.
 Extend your code to use 2, 3, 4 threads, partitioning the image generation work accordingly (threads should get blocks of the image). 
 ```
-Q1: In your write-up, produce a graph of speedup compared to the reference sequential implementation as a function of the number of threads used FOR VIEW 1. Is speedup linear in the number of threads used? In your writeup hypothesize why this is (or is not) the case? (You may also wish to produce a graph for VIEW 2 to help you come up with a good answer. Hint: take a careful look at the three-thread data-point.)
+Q1: In your write-up, produce a graph of speedup compared to the reference sequential implementation 
+as a function of the number of threads used FOR VIEW 1. 
+Is speedup linear in the number of threads used? In your writeup hypothesize why this is (or is not) the case? 
+(You may also wish to produce a graph for VIEW 2 to help you come up with a good answer.) 
+(Hint: take a careful look at the three-thread data-point.)
 ```
 
 To confirm (or disprove) your hypothesis, measure the amount of time each thread requires to complete its work by inserting timing code at the beginning and end of workerThreadStart(). 
+```
 Q2: How do your measurements explain the speedup graph you previously created?
+```
+
 Modify the mapping of work to threads to achieve to improve speedup to at about 3-4x on both views of the Mandelbrot set (if you’re above 3.5x that’s fine, don’t sweat it). You may not use any synchronization between threads in your solution. We are expecting you to come up with a single work decomposition policy that will work well for all thread counts—hard coding a solution specific to each configuration is not allowed! (Hint: There is a very simple static assignment that will achieve this goal, and no communication/synchronization among threads is necessary.). Q3: In your write-up, describe your approach to parallelization and report the final 4-thread speedup obtained.
-Q4: Now run your improved code with eight threads. Is performance noticeably greater than when running with four threads? Why or why not? (Notice that the workstation server provides 4 cores 4 threads.)
+```
+Q4: Now run your improved code with eight threads. 
+Is performance noticeably greater than when running with four threads? Why or why not? 
+(Notice that the workstation server provides 4 cores 4 threads.)
+```
 
 ## Grading Policy
 NO CHEATING!! You will receive no credit if you are found cheating. Don’t take any chances. 😉
